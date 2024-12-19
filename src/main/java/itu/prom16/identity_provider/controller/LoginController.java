@@ -4,6 +4,7 @@
  */
 package itu.prom16.identity_provider.controller;
 
+import itu.prom16.identity_provider.config.JwtTokenUtil;
 import itu.prom16.identity_provider.entity.Users;
 import itu.prom16.identity_provider.service.LoginService;
 import jakarta.servlet.http.HttpSession;
@@ -24,6 +25,9 @@ public class LoginController {
     @Autowired
     private LoginService loginService;
 
+    @Autowired
+    private JwtTokenUtil jwtTokenUtil;
+
     @PostMapping("/send")
     public ResponseEntity<String> send(@RequestBody Users user) {
         try {
@@ -40,9 +44,8 @@ public class LoginController {
             boolean isVerified = loginService.verifyPin(user, pin);
             if (isVerified) {
                 // Retirer le mot de passe avant de stocker l'utilisateur dans la session
-                user.nullPassword();
-                session.setAttribute("user", user);
-                return ResponseEntity.ok("PIN vérifié avec succès. Session créée.");
+                String token = jwtTokenUtil.generateToken(user);
+                return ResponseEntity.ok(token);
             } else {
                 return ResponseEntity.badRequest().body("Échec de la vérification du PIN.");
             }

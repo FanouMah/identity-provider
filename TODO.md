@@ -1,7 +1,7 @@
 # Todo List - Projet Fournisseur d'Identité
 
 ## **1. Configuration de l'Environnement**
-- [ ] **Initialiser le projet Spring Boot**
+- [x][Fanou] **Initialiser le projet Spring Boot**
     - Utilisation de Spring Initializr
     - Ajout des dépendances :
       - Spring Web
@@ -12,10 +12,10 @@
       - PostgreSQL Driver
       - Spring Boot Starter Validation
       - JWT (Java JWT library)
-- [ ] **Configurer Docker Compose pour PostgreSQL et l'application**
+- [ ][Fanou] **Configurer Docker Compose pour PostgreSQL et l'application**
     - Créer un fichier `docker-compose.yaml` avec PostgreSQL et SMTP
     - Configurer les ports exposés
-- [ ] **Configurer l'application Spring Boot**
+- [x][Yohan] **Configurer l'application Spring Boot**
     - Fichier `application.properties` pour :
       - Configuration de la base de données PostgreSQL
       - Configuration SMTP (envoi d'email)
@@ -25,60 +25,62 @@
 ---
 
 ## **2. Base de Données**
-- [ ] **Modélisation de la base de données**
+- [x][Itokiana] **Modélisation de la base de données**
     - Création des entités :
         - `User` : Gère les utilisateurs (id, email, password, nom, prenom, emailVerified, failedLoginAttempts, sessionExpiry)
         - `VerificationToken` : Gère les tokens pour la validation d'email (avec date d'expiration)
         - `LoginAttempt` : Gère les tentatives de connexion
         - `PinVerification` : Stocke les PIN temporaires pour la validation multifactorielle
-- [ ] **Création des répositories JPA**
+- [x][Fanou & Yohan] **Création des répositories JPA**
     - `UserRepository`
     - `VerificationTokenRepository`
     - `LoginAttemptRepository`
     - `PinVerificationRepository`
-- [ ] **Configurer les scripts d'initialisation de la base de données**
+- [x][Itokiana] **Configurer les scripts d'initialisation de la base de données**
 
 ---
 
 ## **3. Fonctionnalités Backend**
 
 ### **Inscription et Validation d'Email**
-- [ ] Endpoint **POST /api/auth/register**
+- [x][Yohan] Endpoint **POST /api/auth/register**
     - Créer un utilisateur avec mot de passe hashé (BCrypt)
     - Générer un token de validation (avec expiration)
     - Envoyer un email avec un lien de validation contenant le token
-- [ ] Endpoint **GET /api/auth/verify**
+- [x][Yohan] Endpoint **GET /api/auth/verify**
     - Valider l'email à partir du token reçu dans le lien
     - Gérer les **tokens expirés** pour la validation d'email
     - Marquer l'email comme vérifié
 
 ### **Authentification Multifacteur**
-- [ ] Endpoint **POST /api/auth/login**
+- [x][Fanou] Endpoint **POST /api/login/send**
     - Valider les identifiants utilisateur
     - Générer un PIN aléatoire (aléatoire à chaque tentative) et l'envoyer par email
     - Stocker le PIN temporairement avec une expiration
-- [ ] Endpoint **POST /api/auth/verify-pin**
+- [x][Fanou] Endpoint **POST /api/login/verify**
     - Valider le PIN entré par l'utilisateur
     - Retourner un JWT si la validation réussit
-- [ ] Gestion des **tentatives de connexion**
+- [x][Fanou] Gestion des **tentatives de connexion**
     - Compter les échecs
     - Bloquer le compte après 3 échecs
-    - Endpoint **POST /api/auth/reset-attempts** : Réinitialiser les tentatives par email
+    - Envoyer un email avec un lien de validation contenant le token
+    - Endpoint **POST /api/user/resettentative/send** : Réinitialiser les tentatives par email
+    - Endpoint **GET /api/user/resettentative/verify** : valider l'email a l'aide d'un token
 
 ### **Gestion de Compte Utilisateur**
-- [ ] Endpoint **GET /api/user/profile** : Récupérer les informations de l'utilisateur
-- [ ] Endpoint **PUT /api/user/update** : Modifier les informations utilisateur (nom, prénom)
-- [ ] Empêcher la modification de l'email
+- [ ][Ony] Endpoint **GET /api/user/profile** : Récupérer les informations de l'utilisateur
+- [ ][Ony] Endpoint **PUT /api/user/update** : Modifier les informations utilisateur (nom, prénom)
+- [ ][Ony] Empêcher la modification de l'email
 
 ### **Gestion des Sessions**
-- [ ] Utiliser **JWT** pour gérer les sessions
+- [ ][Ony] Utiliser **JWT** pour gérer les sessions
     - Durée de vie paramétrable
     - Invalidation du token à la déconnexion
-- [ ] Endpoint **POST /api/auth/logout** : Invalider le token JWT
+- [ ][Ony] Endpoint **POST /api/auth/logout** : Invalider le token JWT
 
 ### **Sécurisation des Mots de Passe**
-- [ ] Hashing des mots de passe avec **BCrypt**
-- [ ] Implémenter une politique de mot de passe fort
+- [ ][Ony] Hashing des mots de passe avec **BCrypt**
+- [ ][Ony] Implémenter une politique de mot de passe fort
 
 ---
 
