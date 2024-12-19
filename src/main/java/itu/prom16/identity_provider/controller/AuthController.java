@@ -16,8 +16,8 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody Session_users user) {
         try {
-            authService.register(user);
-            return ResponseEntity.ok("Enregistrement réussi. Un email de validation a été envoyé.");
+            String response = authService.register(user);
+            return ResponseEntity.ok(response);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Erreur lors de l'enregistrement : " + e.getMessage());
         }

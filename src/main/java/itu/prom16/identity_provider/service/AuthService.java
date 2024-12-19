@@ -1,13 +1,20 @@
 package itu.prom16.identity_provider.service;
 
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 // import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import itu.prom16.identity_provider.config.ConfigProperties;
 import itu.prom16.identity_provider.entity.Session_users;
 import itu.prom16.identity_provider.entity.Token_Inscription;
 import itu.prom16.identity_provider.entity.Users;
@@ -25,35 +32,54 @@ public class AuthService {
     private final TokenInscriptionRepository tokenInscriptionRepository;
     private final UsersRepository usersRepository;  
     private final EmailService emailService;
+    private final ConfigProperties configProperties;
+    private final ResourceLoader resourceLoader;
 
     public AuthService(PasswordEncoder passwordEncoder, 
                        SessionUserRepository sessionUserRepository, 
                        TokenInscriptionRepository tokenInscriptionRepository,
                        UsersRepository usersRepository,
-                       EmailService emailService) {
+                       EmailService emailService,
+                       ConfigProperties configProperties,
+                       ResourceLoader resourceLoader) {
         this.passwordEncoder = passwordEncoder;
         this.sessionUserRepository = sessionUserRepository;
         this.tokenInscriptionRepository = tokenInscriptionRepository;
         this.usersRepository = usersRepository;
         this.emailService = emailService;
+        this.configProperties = configProperties;
+        this.resourceLoader = resourceLoader;
     }
 
-    public void register(Session_users user) {
+    public String register(Session_users user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setdateDemande(LocalDate.now());
         sessionUserRepository.save(user);
 
         String token = UUID.randomUUID().toString();
         Token_Inscription tokenInscription = new Token_Inscription(token, user);
-        tokenInscription.setdateExpiration(LocalDateTime.now().plusSeconds(90));
+        tokenInscription.setdateExpiration(
+            LocalDateTime.now().plusSeconds(configProperties.getDelaiTokenInscription())
+        );
         tokenInscriptionRepository.save(tokenInscription);
 
         String validationLink = "http://localhost:8080/api/auth/verify?token=" + token;
-        emailService.sendEmail(
-            user.getEmail(),
-            "Validation de votre compte",
-            "Cliquez sur le lien suivant pour valider votre compte : " + validationLink
-        );
+        String username = user.getNom()+" "+user.getPrenom();
+        String htmlEmail = "";
+        try {
+            Resource resource = resourceLoader.getResource("classpath:templates/validate_inscription.html");
+            htmlEmail = new String(
+                Files.readAllBytes(Paths.get(resource.getURI())),
+                StandardCharsets.UTF_8
+            );
+            htmlEmail = htmlEmail.replace("{{ username }}", username)
+                                 .replace("{{ validationLink }}", validationLink);
+        } catch (IOException e) {
+            throw new RuntimeException("Erreur lors du chargement du modèle d'email", e);
+        }
+
+        emailService.sendEmail(user.getEmail(),"Validation de votre compte",htmlEmail);
+        return htmlEmail;
     }
 
     public void verifyEmail(String token) {
@@ -73,7 +99,7 @@ public class AuthService {
         );
         newUser.setdateNaissance(user.getdateNaissance());
         newUser.setdateInscription(LocalDateTime.now());
-        newUser.setnombreTentative(0);
+        newUser.setnombreTentative(configProperties.getNombreTentative());
     
         usersRepository.save(newUser);
         sessionUserRepository.delete(user);
