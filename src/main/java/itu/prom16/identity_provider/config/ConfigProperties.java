@@ -15,12 +15,21 @@ import org.springframework.stereotype.Component;
 public class ConfigProperties {
     @Value("${delai.token.inscription}")
     private Integer delaiTokenInscription;
+    
+    @Value("${delai.token.reset.tentative}")
+    private Integer delaiTokenResetTentative;
 
     @Value("${delai.pin.connexion}")
     private Integer delaiPinConnexion;
     
     @Value("${nombre.tentative}")
     private Integer nombreTentative;
+    
+    @Value("${server.ip}")
+    private String serverIp;
+    
+    @Value("${server.port}")
+    private String serverPort;
 
     public Integer getDelaiTokenInscription() {
         return delaiTokenInscription;
@@ -32,6 +41,18 @@ public class ConfigProperties {
 
     public Integer getNombreTentative() {
         return nombreTentative;
+    }
+
+    public String getServerIp() {
+        return serverIp;
+    }
+
+    public String getServerPort() {
+        return serverPort;
+    }
+
+    public Integer getDelaiTokenResetTentative() {
+        return delaiTokenResetTentative;
     }
     
 }

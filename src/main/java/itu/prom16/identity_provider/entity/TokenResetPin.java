@@ -50,6 +50,12 @@ public class TokenResetPin {
         this.dateExpiration = dateExpiration;
     }
 
+    public TokenResetPin(String code, LocalDateTime dateExpiration, Users idUsers) {
+        this.code = code;
+        this.dateExpiration = dateExpiration;
+        this.idUsers = idUsers;
+    }
+
     public Integer getIdTokenResetPin() {
         return idTokenResetPin;
     }

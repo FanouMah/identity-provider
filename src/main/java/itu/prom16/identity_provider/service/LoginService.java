@@ -18,7 +18,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
-import java.util.Objects;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -51,12 +50,12 @@ public class LoginService {
 
     }
     
-    public Users verifyUser(Users userInput) throws Exception {
+    public Users verifyUser(Users userInput) {
         // Vérification si l'utilisateur existe dans la base de données
         Users user = usersRepository.findByEmail(userInput.getEmail())
                 .orElseThrow(() -> new RuntimeException("Utilisateur non trouvé avec l'email : " + userInput.getEmail()));
 
-        if (user.getnombreTentative() < 0) {
+        if (user.getnombreTentative() < 1) {
             throw new RuntimeException("Vous avez atteint le nombre de tentative de connexion.");
         }
         // Vérification du mot de passe
@@ -68,7 +67,7 @@ public class LoginService {
         return user;
     }
     
-    public String sendPin(Users userInput) throws Exception  {
+    public String sendPin(Users userInput) {
         Users user = verifyUser(userInput);
          // Génération d'un PIN aléatoire à 6 chiffres
         Integer pin = (int) (Math.random() * 900000) + 100000;
@@ -106,7 +105,7 @@ public class LoginService {
         return htmlEmail;
     }
     
-    public boolean verifyPin(Users userInput, String pin) throws Exception  {
+    public boolean verifyPin(Users userInput, String pin)  {
         Users user = verifyUser(userInput);
         // Récupération du PIN le plus récent pour l'utilisateur
         PinVerification pinVerification = pinVerificationRepository

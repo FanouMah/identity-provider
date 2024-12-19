@@ -25,7 +25,9 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Excepti
                     .requestMatchers("/api/auth/register",
                                      "/api/auth/verify",
                                      "/api/login/send",
-                                     "/api/login/verify"
+                                     "/api/login/verify",
+                                     "/api/user/resettentative/send",
+                                     "/api/user/resettentative/verify"
                                     ).permitAll()  // Permet l'accès à l'inscription et à la vérification sans authentification
                     .anyRequest().authenticated()  // Nécessite l'authentification pour toutes les autres requêtes
             )

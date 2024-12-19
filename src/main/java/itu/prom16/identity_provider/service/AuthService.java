@@ -66,7 +66,9 @@ public class AuthService {
                 LocalDateTime.now().plusSeconds(configProperties.getDelaiTokenInscription())
             );
 
-            String validationLink = "http://192.168.43.16:8080/api/auth/verify?token=" + token;
+            String ip = configProperties.getServerIp();
+            String port = configProperties.getServerPort();
+            String validationLink = "http://"+ip+":"+port+"/api/auth/verify?token=" + token;
             String username = user.getNom()+" "+user.getPrenom();
             String htmlEmail = "";
             try {
