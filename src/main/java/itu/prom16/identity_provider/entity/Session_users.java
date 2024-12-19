@@ -9,7 +9,7 @@ public class Session_users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id_session_user", nullable = false)
-    private int id_session_user;
+    private int idSessionUser;
 
     @Column(name = "nom" , nullable = false)
     private String nom;
@@ -18,7 +18,7 @@ public class Session_users {
     private String prenom;
 
     @Column(name = "date_naissance" , nullable = false)
-    private LocalDate date_naissance;
+    private LocalDate dateNaissance;
 
     @Column(name = "email" , nullable = false, unique = true)
     private String email;
@@ -27,19 +27,19 @@ public class Session_users {
     private String password;
 
     @Column(name = "date_demande" , nullable = false)
-    private LocalDate date_demande;
+    private LocalDate dateDemande;
 
 
-    public int getId_session_user() {
-        return id_session_user;
+    public int getidSessionUser() {
+        return idSessionUser;
     }
 
-    void setId_session_user(int id_session_user) {
-        this.id_session_user = id_session_user;
+    void setidSessionUser(int idSessionUser) {
+        this.idSessionUser = idSessionUser;
     }
 
-    public void setId_session_user(String id_session_user){
-        setId_session_user(Integer.parseInt(id_session_user));
+    public void setidSessionUser(String idSessionUser){
+        setidSessionUser(Integer.parseInt(idSessionUser));
     }
 
     public String getNom() {
@@ -58,16 +58,16 @@ public class Session_users {
         this.prenom = prenom;
     }
 
-    public LocalDate getDate_naissance() {
-        return date_naissance;
+    public LocalDate getdateNaissance() {
+        return dateNaissance;
     }
 
-    void setDate_naissance(LocalDate date_naissance) {
-        this.date_naissance = date_naissance;
+    void setdateNaissance(LocalDate dateNaissance) {
+        this.dateNaissance = dateNaissance;
     }
 
-    public void setDate_naissance(String date_naissance){
-        setDate_naissance(LocalDate.parse(date_naissance));
+    public void setdateNaissance(String dateNaissance){
+        setdateNaissance(LocalDate.parse(dateNaissance));
     }
 
     public String getEmail() {
@@ -82,7 +82,7 @@ public class Session_users {
         return password;
     }
 
-     void setPassword(String password) {
+     public void setPassword(String password) {
         this.password = password;
     }
     
@@ -97,15 +97,15 @@ public class Session_users {
         this.email = email;
     }
 
-    public LocalDate getDate_demande() {
-        return date_demande;
+    public LocalDate getdateDemande() {
+        return dateDemande;
     }
 
-    void setDate_demande(LocalDate date_demande) {
-        this.date_demande = date_demande;
+    public void setdateDemande(LocalDate dateDemande) {
+        this.dateDemande = dateDemande;
     }
 
-    public void setDate_demande(String date_demande) {
-        setDate_demande(LocalDate.parse(date_demande));
+    public void setdateDemande(String dateDemande) {
+        setdateDemande(LocalDate.parse(dateDemande));
     }
 }

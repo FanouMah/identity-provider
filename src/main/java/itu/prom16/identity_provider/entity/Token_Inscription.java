@@ -1,6 +1,8 @@
 package itu.prom16.identity_provider.entity;
 
-import java.time.LocalDate;
+// import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -9,30 +11,30 @@ public class Token_Inscription {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Id_session_user", nullable = false)
-    private int Id_token_inscription;
+    @Column(name = "Id_token_inscription", nullable = false)
+    private int idTokenInscription;
 
     @Column(name = "code", nullable = false,unique = true)
     private String code;
 
     @Column(name = "date_expiration", nullable = false)
-    private LocalDate date_expiration;
+    private LocalDateTime dateExpiration;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "Id_session_user", referencedColumnName = "Id_session_user")
-    private Session_users sessionUser;
+    private Session_users idSessionUser;
 
 
-    public int getId_token_inscription() {
-        return Id_token_inscription;
+    public int getidTokenInscription() {
+        return idTokenInscription;
     }
 
-    void setId_token_inscription(int id_token_inscription) {
-        Id_token_inscription = id_token_inscription;
+    void setidTokenInscription(int idTokenInscription) {
+        this.idTokenInscription = idTokenInscription;
     }
-
-    public void setId_token_inscription(String id_token_inscription) {
-        setId_token_inscription(Integer.parseInt(id_token_inscription));
+    
+    public void setidTokenInscription(String idTokenInscription) {
+        setidTokenInscription(Integer.parseInt(idTokenInscription));
     }
 
     public String getCode() {
@@ -43,32 +45,32 @@ public class Token_Inscription {
         this.code = code;
     }
 
-    public LocalDate getDate_expiration() {
-        return date_expiration;
+    public LocalDateTime getdateExpiration() {
+        return dateExpiration;
     }
 
-    void setDate_expiration(LocalDate date_expiration) {
-        this.date_expiration = date_expiration;
+    public void setdateExpiration(LocalDateTime dateExpiration) {
+        this.dateExpiration = dateExpiration;
     }
 
-    public void setDate_expiration(String date_expiration){
-        this.date_expiration = LocalDate.parse(date_expiration);
+    public void setdateExpiration(String dateExpiration){
+        this.dateExpiration = LocalDateTime.parse(dateExpiration);
     }
 
     
-    public Session_users getSessionUser() {
-        return sessionUser;
+    public Session_users getidSessionUser() {
+        return idSessionUser;
     }
 
-    void setSessionUser(Session_users sessionUser) {
-        this.sessionUser = sessionUser;
+    void setidSessionUser(Session_users idSessionUser) {
+        this.idSessionUser = idSessionUser;
     }
 
     public Token_Inscription() {
     }
 
-    public Token_Inscription(String code, Session_users sessionUser) {
+    public Token_Inscription(String code, Session_users idSessionUser) {
         this.code = code;        
-        this.sessionUser = sessionUser;
+        this.idSessionUser = idSessionUser;
     }
 }

@@ -1,3 +1,6 @@
+CREATE database cloud;
+\c cloud
+
 CREATE TABLE session_users(
    Id_session_user SERIAL,
    nom VARCHAR(255)  NOT NULL,

@@ -12,7 +12,7 @@ public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id_users", nullable = false)
-    private int Id_users;
+    private int idUsers;
 
     @Column(name = "nom", nullable = false)
     private String nom;
@@ -21,10 +21,10 @@ public class Users {
     private String prenom;
 
     @Column(name = "date_inscription" , nullable = false)
-    private LocalDateTime date_inscription;
+    private LocalDateTime dateInscription;
 
     @Column(name = "date_naissance" , nullable = false)
-    private LocalDate date_naissance;
+    private LocalDate dateNaissance;
 
     @Column(name = "email", nullable = false, unique = true)
     private String email;
@@ -33,18 +33,18 @@ public class Users {
     private String password;
 
     @Column(name = "nombre_tentative", nullable = false)
-    private int nombre_tentative;
+    private int nombreTentative;
 
-    public int getId_users() {
-        return Id_users;
+    public int getidUsers() {
+        return idUsers;
     }
 
-    void setId_users(int id_users) {
-        Id_users = id_users;
+    void setidUsers(int idUsers) {
+        this.idUsers = idUsers;
     }
 
-    public void setId_users(String id_users){
-        this.Id_users=Integer.parseInt(id_users);
+    public void setidUsers(String idUsers){
+        this.idUsers=Integer.parseInt(idUsers);
     }
 
     public String getNom() {
@@ -63,27 +63,27 @@ public class Users {
         this.prenom = prenom;
     }
 
-    public LocalDateTime getDate_inscription() {
-        return date_inscription;
+    public LocalDateTime getdateInscription() {
+        return dateInscription;
     }
 
-    void setDate_inscription(LocalDateTime date_inscription) {
-        this.date_inscription = date_inscription;
+    public void setdateInscription(LocalDateTime dateInscription) {
+        this.dateInscription = dateInscription;
     }
 
-    public void setDate_inscription(String date_inscription) {
-        this.date_inscription = LocalDateTime.parse(date_inscription);
+    public void setdateInscription(String dateInscription) {
+        this.dateInscription = LocalDateTime.parse(dateInscription);
     }
-    public LocalDate getDate_naissance() {
-        return date_naissance;
-    }
-
-    void setDate_naissance(LocalDate date_naissance) {
-        this.date_naissance = date_naissance;
+    public LocalDate getdateNaissance() {
+        return dateNaissance;
     }
 
-    public void setDate_naissance(String date_naissance){
-        this.date_naissance=LocalDate.parse(date_naissance);
+    public void setdateNaissance(LocalDate dateNaissance) {
+        this.dateNaissance = dateNaissance;
+    }
+
+    public void setdateNaissance(String dateNaissance){
+        this.dateNaissance=LocalDate.parse(dateNaissance);
     }
 
     public String getEmail() {
@@ -113,15 +113,15 @@ public class Users {
         this.password=password;
     }
 
-    public int getNombre_tentative() {
-        return nombre_tentative;
+    public int getnombreTentative() {
+        return nombreTentative;
     }
 
-    void setNombre_tentative(int nombre_tentative) {
-        this.nombre_tentative = nombre_tentative;
+    public void setnombreTentative(int nombreTentative) {
+        this.nombreTentative = nombreTentative;
     }
 
-    public void setNombre_tentative(String nombre_tentative){
-        this.nombre_tentative=Integer.parseInt(nombre_tentative);
+    public void setnombreTentative(String nombreTentative){
+        this.nombreTentative=Integer.parseInt(nombreTentative);
     }
 }
