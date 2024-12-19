@@ -85,20 +85,20 @@
 ---
 
 ## **4. Emails au Format HTML**
-- [ ] Création des templates HTML pour :
+- [X][Itokiana] Création des templates HTML pour :
     - Validation d'email : `verification_email.html`
     - Envoi de PIN : `pin_verification_email.html`
-- [ ] Intégration des templates avec Thymeleaf
-- [ ] Envoi des emails via SMTP
-- [ ] Génération d'un **PIN aléatoire** à chaque nouvelle tentative d'authentification
-- [ ] Gérer les **tokens expirés** pour la validation d'email
+- [x][Fanou] Intégration des templates
+- [x][Yohan] Envoi des emails via SMTP
+- [x][Fanou] Génération d'un **PIN aléatoire** à chaque nouvelle tentative d'authentification
+- [x][Yohan] Gérer les **tokens expirés** pour la validation d'email
 
 ---
 
 ## **5. Documentation API avec Swagger**
-- [ ] Ajouter la dépendance Swagger
-- [ ] Configurer Swagger UI accessible à `/swagger-ui/`
-- [ ] Documenter tous les endpoints :
+- [ ][Ony] Ajouter la dépendance Swagger
+- [ ][Ony] Configurer Swagger UI accessible à `/swagger-ui/`
+- [ ][Ony] Documenter tous les endpoints :
     - Inscription
     - Authentification
     - Validation de PIN
@@ -107,12 +107,10 @@
 ---
 
 ## **6. Tests et Validation**
-- [ ] **Tests Unitaires**
-    - Créer des tests pour les services (JUnit 5 / Mockito)
-- [ ] **Tests d'Intégration**
-    - Tester les endpoints via Postman ou MockMvc
-- [ ] **Vérification de l'envoi d'emails**
-- [ ] **Tests des scénarios d'erreurs**
+- [x][Fanou & Yohan] **Tests d'Intégration**
+    - Tester les endpoints via Postman
+- [x][Fanou & Yohan] **Vérification de l'envoi d'emails**
+- [x][Fanou & Yohan] **Tests des scénarios d'erreurs**
     - Tentatives de connexion échouées
     - Validation d'email expirée
     - PIN incorrect
@@ -120,13 +118,13 @@
 ---
 
 ## **7. Collection Postman**
-- [ ] Créer une collection Postman pour tester :
+- [ ][Itokiana] Créer une collection Postman pour tester :
     - Inscription
     - Validation d'email
     - Authentification
     - Validation de PIN
     - Gestion du compte utilisateur
-- [ ] Inclure des scénarios d'erreur dans la collection
+- [ ][Itokiana] Inclure des scénarios d'erreur dans la collection
 
 ---
 
@@ -136,7 +134,7 @@
 1. Utilisateur s'inscrit avec email et mot de passe.
 2. Reçoit un email de confirmation avec un lien.
 3. Clique sur le lien pour vérifier l'email.
-4. Si le token a expiré, recevoir un nouveau lien d'activation.
+4. Si le token a expiré, on retourne un erreur.
 
 ### Scénario 2 : Authentification Multifacteur
 1. Utilisateur se connecte avec email et mot de passe.
@@ -150,16 +148,5 @@
 
 ---
 
-## **9. Améliorations Futures**
-- [ ] Ajouter un système de réinitialisation de mot de passe.
-- [ ] Implémenter une authentification OAuth2.
-- [ ] Ajouter des logs d'activité utilisateur.
-- [ ] Mettre en place un système de captcha pour l'inscription.
-- [ ] Gérer les tokens expirés pour la validation d'email (déjà ajouté).
-
----
-
-## **10. Déploiement**
-- [ ] Créer une image Docker de l'application
-- [ ] Pousser l'image sur Docker Hub
-- [ ] Déployer sur un serveur cloud (AWS, GCP, Azure)
+## **9. Déploiement**
+- [ ][Fanou] Créer une image Docker de l'application
