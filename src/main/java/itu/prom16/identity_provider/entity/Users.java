@@ -101,6 +101,10 @@ public class Users {
     void setPassword(String password) {
         this.password = password;
     }
+    
+    public void nullPassword() {
+        this.password = null;
+    }
 
     public Users(){
 

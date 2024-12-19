@@ -22,7 +22,11 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Excepti
     http
             .csrf(csrf -> csrf.disable())  // Désactive CSRF (utile avec JWT)
             .authorizeRequests(requests -> requests
-                    .requestMatchers("/api/auth/register", "/api/auth/verify").permitAll()  // Permet l'accès à l'inscription et à la vérification sans authentification
+                    .requestMatchers("/api/auth/register",
+                                     "/api/auth/verify",
+                                     "/api/login/send",
+                                     "/api/login/verify"
+                                    ).permitAll()  // Permet l'accès à l'inscription et à la vérification sans authentification
                     .anyRequest().authenticated()  // Nécessite l'authentification pour toutes les autres requêtes
             )
             .httpBasic().disable()  // Désactive l'authentification HTTP de base

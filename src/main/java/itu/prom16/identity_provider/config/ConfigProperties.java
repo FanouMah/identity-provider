@@ -14,23 +14,23 @@ import org.springframework.stereotype.Component;
 @Component
 public class ConfigProperties {
     @Value("${delai.token.inscription}")
-    private int delaiTokenInscription;
+    private Integer delaiTokenInscription;
 
     @Value("${delai.pin.connexion}")
-    private int delaiPinConnexion;
+    private Integer delaiPinConnexion;
     
     @Value("${nombre.tentative}")
-    private int nombreTentative;
+    private Integer nombreTentative;
 
-    public int getDelaiTokenInscription() {
+    public Integer getDelaiTokenInscription() {
         return delaiTokenInscription;
     }
 
-    public int getDelaiPinConnexion() {
+    public Integer getDelaiPinConnexion() {
         return delaiPinConnexion;
     }
 
-    public int getNombreTentative() {
+    public Integer getNombreTentative() {
         return nombreTentative;
     }
     
