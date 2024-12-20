@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #121212;
+    color: #e0e0e0;
+  }
+
+  .email-container {
+    max-width: 600px;
+    margin: 40px auto;
+    background-color: #1e1e1e;
+    border: 1px solid #333;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+  }
+
+  .header {
+    background-color: #03DAC6;
+    color: #121212;
+    text-align: center;
+    padding: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+  }
+
+  .content {
+    padding: 20px;
+    text-align: center;
+  }
+
+  .content p {
+    font-size: 16px;
+    line-height: 1.8;
+    margin: 20px 0;
+  }
+
+  .confirm-button {
+    display: inline-block;
+    padding: 15px 25px;
+    font-size: 16px;
+    color: #1e1e1e;
+    background-color: #03DAC6;
+    text-decoration: none;
+    border-radius: 8px;
+    box-shadow: 0 3px 6px rgba(3, 218, 198, 0.4);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+
+  .confirm-button:hover {
+    background-color: #02c7b8;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(3, 218, 198, 0.6);
+  }
+
+  .footer {
+    background-color: #181818;
+    color: #757575;
+    text-align: center;
+    padding: 15px;
+    font-size: 12px;
+    border-top: 1px solid #333;
+  }
+</style>
+</head>
+<body>
+
+<div class="email-container">
+  <div class="header">
+    Confirmez votre adresse email
+  </div>
+  <div class="content">
+    <p style="color: #e0e0e0;">Bonjour {{ username }}, Veuillez confirmer votre adresse email pour compléter votre inscription.</p>
+    <a href="{{ validationLink }}" class="confirm-button">Confirmer mon email</a>
+  </div>
+  <div class="footer">
+    Vous avez reçu cet email parce que vous vous êtes inscrit sur notre site. Si vous ne reconnaissez pas cette action, veuillez ignorer ce message.
+  </div>
+</div>
+
+</body>
+</html>

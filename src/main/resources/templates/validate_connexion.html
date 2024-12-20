@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #121212;
+    color: #e0e0e0;
+  }
+
+  .email-container {
+    max-width: 600px;
+    margin: 40px auto;
+    background-color: #1e1e1e;
+    border: 1px solid #333;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+  }
+
+  .header {
+    background-color: #bb86fc;
+    color: #121212;
+    text-align: center;
+    padding: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+  }
+
+  .content {
+    padding: 20px;
+    text-align: center;
+  }
+
+  .content p {
+    font-size: 16px;
+    line-height: 1.8;
+    margin: 20px 0;
+  }
+
+  .confirmation-code {
+    display: inline-block;
+    padding: 12px 24px;
+    font-size: 22px;
+    font-weight: bold;
+    color: #1e1e1e;
+    background-color: #bb86fc;
+    border-radius: 8px;
+    margin: 20px 0;
+    letter-spacing: 3px;
+    box-shadow: 0 3px 6px rgba(187, 134, 252, 0.4);
+  }
+
+  .confirmation-code:hover {
+    background-color: #a469e8;
+    box-shadow: 0 5px 10px rgba(187, 134, 252, 0.6);
+  }
+
+  .footer {
+    background-color: #181818;
+    color: #757575;
+    text-align: center;
+    padding: 15px;
+    font-size: 12px;
+    border-top: 1px solid #333;
+  }
+</style>
+</head>
+<body>
+
+<div class="email-container">
+  <div class="header">
+    Votre code de confirmation
+  </div>
+  <div class="content">
+    <p style="color: #e0e0e0;">Bonjour {{ username }} Pour continuer votre connexion, veuillez utiliser le code de confirmation ci-dessous. Ce code est temporaire et expirera dans {{ delai }} secondes.</p>
+    <div class="confirmation-code">{{ confirmation_code }}</div>
+    <p>Si vous n'avez pas demandé ce code, vous pouvez ignorer cet email. Merci de protéger vos informations.</p>
+  </div>
+  <div class="footer">
+    Cet email vous a été envoyé dans le cadre d'une demande de connexion ou d'inscription. Si vous avez des questions, veuillez contacter notre support.
+  </div>
+</div>
+
+</body>
+</html>
