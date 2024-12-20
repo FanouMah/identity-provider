@@ -51,7 +51,7 @@ public class UserService {
         
         String ip = configProperties.getServerIp();
         String port = configProperties.getServerPort();
-        String validationLink = "http://"+ip+":"+port+"/api/user/resettentative/send?token=" + token; 
+        String validationLink = "http://"+ip+":"+port+"/api/user/resettentative/verify?token=" + token; 
         String username = user.getNom()+" "+user.getPrenom();
         String htmlEmail = "";
         
@@ -95,5 +95,28 @@ public class UserService {
             throw new RuntimeException("Mot de passe incorrect");
         }
         return user;
+    }
+
+    public Users updateUserDetails(String email, Users userUpdates) {
+        Users existingUser = usersRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("Utilisateur non trouvé avec l'email : " + email));
+
+        // Mise à jour des informations utilisateur sauf l'email
+        if (userUpdates.getNom() != null) {
+            existingUser.setNom(userUpdates.getNom());
+        }
+        if (userUpdates.getPrenom() != null) {
+            existingUser.setPrenom(userUpdates.getPrenom());
+        }
+        
+        if (userUpdates.getdateNaissance() != null) {
+            userUpdates.setdateNaissance(userUpdates.getdateNaissance());
+        }
+        if (userUpdates.getPassword() != null) {
+            existingUser.setPassword(passwordEncoder.encode(userUpdates.getPassword()));
+        }
+
+        usersRepository.save(existingUser);
+        return existingUser;
     }
 }

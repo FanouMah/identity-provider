@@ -51,7 +51,7 @@ public class Users {
         return nom;
     }
 
-    void setNom(String nom) {
+    public void setNom(String nom) {
         this.nom = nom;
     }
 
@@ -59,7 +59,7 @@ public class Users {
         return prenom;
     }
 
-    void setPrenom(String prenom) {
+    public void setPrenom(String prenom) {
         this.prenom = prenom;
     }
 
@@ -98,7 +98,7 @@ public class Users {
         return password;
     }
 
-    void setPassword(String password) {
+    public void setPassword(String password) {
         this.password = password;
     }
     

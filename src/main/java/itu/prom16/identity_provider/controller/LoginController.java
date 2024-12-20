@@ -24,7 +24,7 @@ public class LoginController {
 
     @Autowired
     private LoginService loginService;
-
+    
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
 
@@ -45,7 +45,10 @@ public class LoginController {
             if (isVerified) {
                 // Retirer le mot de passe avant de stocker l'utilisateur dans la session
                 String token = jwtTokenUtil.generateToken(user);
-                return ResponseEntity.ok(token);
+                // Ajout du token dans les headers de la réponse
+                return ResponseEntity.ok()
+                        .header("Authorization", token) // Ajouter le token dans le header
+                        .body("Connexion réussie, token généré : "+token); // Message de confirmation dans le corps
             } else {
                 return ResponseEntity.badRequest().body("Échec de la vérification du PIN.");
             }
@@ -53,5 +56,5 @@ public class LoginController {
             return ResponseEntity.badRequest().body("Erreur lors de la vérification du PIN : " + e.getMessage());
         }
     }
-
+    
 }

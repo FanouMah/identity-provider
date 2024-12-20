@@ -5,7 +5,7 @@
 package itu.prom16.identity_provider.service;
 
 import itu.prom16.identity_provider.config.ConfigProperties;
-import itu.prom16.identity_provider.entity.HistoriqueConnexion;
+import itu.prom16.identity_provider.entity.*;
 import itu.prom16.identity_provider.entity.HistoriqueTentative;
 import itu.prom16.identity_provider.entity.PinVerification;
 import itu.prom16.identity_provider.entity.Users;
