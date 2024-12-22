@@ -27,6 +27,7 @@ public class JwtTokenUtil {
     @Value("${delai.token.session}")
     private long EXPIRATION_TIME;
 
+    @SuppressWarnings("deprecation")
     public String generateToken(Users user) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("id", user.getidUsers());
@@ -47,6 +48,7 @@ public class JwtTokenUtil {
         return getAllClaimsFromToken(token).getSubject(); // Le sujet contient l'email
     }
 
+    @SuppressWarnings("deprecation")
     private Claims getAllClaimsFromToken(String token) {
         return Jwts.parser()
                 .setSigningKey(SECRET_KEY.getBytes())

@@ -74,7 +74,7 @@ public class UserService {
     
     public  void verifyEmailResetPin(String token) {
         TokenResetPin tokenResetPin = tokenResetPinRepository.findByCode(token)
-                .orElseThrow(() -> new RuntimeException("Token invalide ou expiré"));
+                .orElseThrow(() -> new RuntimeException("Token invalide"));
         
         if (tokenResetPin.getDateExpiration().isBefore(LocalDateTime.now())) {
             throw new RuntimeException("Token expiré");

@@ -92,7 +92,7 @@ public class AuthService {
 
     public void verifyEmail(String token) {
         Token_Inscription tokenEntity = tokenInscriptionRepository.findByCode(token)
-                .orElseThrow(() -> new RuntimeException("Token invalide ou expiré"));
+                .orElseThrow(() -> new RuntimeException("Token invalide"));
     
         Session_users user = tokenEntity.getidSessionUser();
         
