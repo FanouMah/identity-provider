@@ -101,8 +101,8 @@
 
 ## **5. Documentation API avec Swagger**
 - [x][Ony] Ajouter la dépendance Swagger
-- [ ][Ony] Configurer Swagger UI accessible à `/swagger-ui/`
-- [ ][Ony] Documenter tous les endpoints :
+- [x][Ony] Configurer Swagger UI accessible à `/swagger-ui/`
+- [x][Ony] Documenter tous les endpoints :
     - Inscription
     - Authentification
     - Validation de PIN

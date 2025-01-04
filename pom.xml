@@ -86,7 +86,7 @@
             <version>2.6.0</version>
         </dependency>
 
-                <!-- JWT (tokens)-->
+        <!-- JWT (tokens)-->
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt-api</artifactId>

@@ -13,6 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+
 /**
  *
  * @author Fanou
@@ -28,6 +32,11 @@ public class LoginController {
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
 
+    @Operation(summary = "Envoyer un code PIN", description = "Génère et envoie un code PIN à l'utilisateur pour l'authentification.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Code PIN envoyé avec succès"),
+        @ApiResponse(responseCode = "400", description = "Erreur lors de l'envoi du code PIN")
+    })
     @PostMapping("/send")
     public ResponseEntity<String> send(@RequestBody Users user) {
         try {
@@ -38,6 +47,11 @@ public class LoginController {
         }
     }
     
+    @Operation(summary = "Vérifier le code PIN", description = "Vérifie le code PIN fourni et génère un token JWT en cas de succès.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Code PIN vérifié, connexion réussie"),
+        @ApiResponse(responseCode = "400", description = "Échec de la vérification du code PIN")
+    })
     @PostMapping("/verify")
     public ResponseEntity<String> verify(@RequestBody Users user, @RequestParam String pin, HttpSession session) {
         try {
