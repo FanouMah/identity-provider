@@ -1,5 +1,6 @@
 package itu.prom16.identity_provider.controller;
 
+import itu.prom16.identity_provider.DTO.UserRequest;
 import itu.prom16.identity_provider.entity.Session_users;
 import itu.prom16.identity_provider.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +24,9 @@ public class AuthController {
         @ApiResponse(responseCode = "400", description = "Erreur lors de l'enregistrement")
     })
     @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestBody Session_users user) {
+    public ResponseEntity<String> register(@RequestBody UserRequest request) {
         try {
-            String response = authService.register(user);
+            String response = authService.register(new Session_users(request));
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Erreur lors de l'enregistrement : " + e.getMessage());

@@ -7,11 +7,13 @@ package itu.prom16.identity_provider.repository;
 import itu.prom16.identity_provider.entity.TokenResetPin;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Fanou
  */
+@Repository
 public interface TokenResetPinRepository extends JpaRepository<TokenResetPin, Integer>{
     Optional<TokenResetPin> findByCode(String code); 
 }

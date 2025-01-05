@@ -4,6 +4,7 @@
  */
 package itu.prom16.identity_provider.controller;
 
+import itu.prom16.identity_provider.DTO.LoginRequest;
 import itu.prom16.identity_provider.config.JwtTokenUtil;
 import itu.prom16.identity_provider.entity.Users;
 import itu.prom16.identity_provider.service.LoginService;
@@ -38,9 +39,9 @@ public class LoginController {
         @ApiResponse(responseCode = "400", description = "Erreur lors de l'envoi du code PIN")
     })
     @PostMapping("/send")
-    public ResponseEntity<String> send(@RequestBody Users user) {
+    public ResponseEntity<String> send(@RequestBody LoginRequest request) {
         try {
-            String response = loginService.sendPin(user);
+            String response = loginService.sendPin(new Users(request));
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Erreur lors de la connexion : " + e.getMessage());
@@ -53,15 +54,16 @@ public class LoginController {
         @ApiResponse(responseCode = "400", description = "Échec de la vérification du code PIN")
     })
     @PostMapping("/verify")
-    public ResponseEntity<String> verify(@RequestBody Users user, @RequestParam String pin, HttpSession session) {
+    public ResponseEntity<String> verify(@RequestBody LoginRequest request, @RequestParam String pin, HttpSession session) {
         try {
+            Users user = new Users(request);
             boolean isVerified = loginService.verifyPin(user, pin);
             if (isVerified) {
                 // Retirer le mot de passe avant de stocker l'utilisateur dans la session
                 String token = jwtTokenUtil.generateToken(user);
                 // Ajout du token dans les headers de la réponse
                 return ResponseEntity.ok()
-                        .header("Authorization", token) // Ajouter le token dans le header
+                        .header("authorization", token) // Ajouter le token dans le header
                         .body("Connexion réussie, token généré : "+token); // Message de confirmation dans le corps
             } else {
                 return ResponseEntity.badRequest().body("Échec de la vérification du PIN.");

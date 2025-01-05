@@ -4,6 +4,8 @@
  */
 package itu.prom16.identity_provider.controller;
 
+import itu.prom16.identity_provider.DTO.LoginRequest;
+import itu.prom16.identity_provider.DTO.UpdateUserRequest;
 import itu.prom16.identity_provider.config.JwtTokenUtil;
 import itu.prom16.identity_provider.entity.Users;
 import itu.prom16.identity_provider.service.UserService;
@@ -42,9 +44,9 @@ public class UsersController {
         @ApiResponse(responseCode = "400", description = "Erreur lors de l'envoi du lien")
     })
     @PostMapping("/resettentative/send")
-    public ResponseEntity<String> sendResetTentative(@RequestBody Users user) {
+    public ResponseEntity<String> sendResetTentative(@RequestBody LoginRequest request) {
         try {
-            String response = userService.resetPin(user);
+            String response = userService.resetPin(new Users(request));
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Erreur lors de la reinitialisation du nombre de tentative : " + e.getMessage());
@@ -72,10 +74,10 @@ public class UsersController {
         @ApiResponse(responseCode = "400", description = "Erreur lors de la mise à jour")
     })
     @PutMapping("/update")
-    public ResponseEntity<String> updateUser(@RequestHeader("Authorization") String token, @RequestBody Users userUpdates) {
+    public ResponseEntity<String> updateUser(@RequestHeader("authorization") String token, @RequestBody UpdateUserRequest request) {
         try {
             String email = jwtTokenUtil.getUsernameFromToken(token);
-            Users updatedUser = userService.updateUserDetails(email, userUpdates);
+            Users updatedUser = userService.updateUserDetails(email, new Users(request));
             return ResponseEntity.ok("Informations mises à jour avec succès pour l'utilisateur : " + updatedUser.getEmail());
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Erreur lors de la mise à jour des informations utilisateur : " + e.getMessage());

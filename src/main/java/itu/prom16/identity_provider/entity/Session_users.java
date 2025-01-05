@@ -1,6 +1,8 @@
 package itu.prom16.identity_provider.entity;
 
 import java.time.LocalDate;
+
+import itu.prom16.identity_provider.DTO.UserRequest;
 import jakarta.persistence.*;
 
 @Entity
@@ -95,6 +97,14 @@ public class Session_users {
         this.prenom = prenom;
         this.password = password;
         this.email = email;
+    }
+
+    public Session_users(UserRequest request){
+        this.nom = request.getNom();
+        this.prenom = request.getPrenom();
+        this.password = request.getPassword();
+        this.email = request.getEmail();
+        this.dateNaissance = request.getDateNaissance();
     }
 
     public LocalDate getdateDemande() {

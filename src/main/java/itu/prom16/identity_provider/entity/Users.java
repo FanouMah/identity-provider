@@ -3,6 +3,9 @@ package itu.prom16.identity_provider.entity;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import itu.prom16.identity_provider.DTO.LoginRequest;
+import itu.prom16.identity_provider.DTO.UpdateUserRequest;
+import itu.prom16.identity_provider.DTO.UserRequest;
 import jakarta.persistence.*;
 
 @Entity
@@ -116,7 +119,24 @@ public class Users {
         this.email=email;
         this.password=password;
     }
+    public Users(LoginRequest request){
+        this.email=request.getEmail();
+        this.password=request.getPassword();
+    }
 
+    public Users(UserRequest request){
+        this.nom = request.getNom();
+        this.prenom = request.getPrenom();
+        this.password = request.getPassword();
+        this.email = request.getEmail();
+        this.dateNaissance = request.getDateNaissance();
+    }
+
+    public Users(UpdateUserRequest request){
+        this.nom = request.getNom();
+        this.prenom = request.getPrenom();
+        this.dateNaissance = request.getDateNaissance();
+    }
     public int getnombreTentative() {
         return nombreTentative;
     }

@@ -11,7 +11,7 @@
 	<groupId>itu.prom16</groupId>
 	<artifactId>identity-provider</artifactId>
 	<version>1.0</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>identity-provider</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>

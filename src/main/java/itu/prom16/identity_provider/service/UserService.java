@@ -112,9 +112,9 @@ public class UserService {
         if (userUpdates.getdateNaissance() != null) {
             userUpdates.setdateNaissance(userUpdates.getdateNaissance());
         }
-        if (userUpdates.getPassword() != null) {
-            existingUser.setPassword(passwordEncoder.encode(userUpdates.getPassword()));
-        }
+        // if (userUpdates.getPassword() != null) {
+        //     existingUser.setPassword(passwordEncoder.encode(userUpdates.getPassword()));
+        // }
 
         usersRepository.save(existingUser);
         return existingUser;
