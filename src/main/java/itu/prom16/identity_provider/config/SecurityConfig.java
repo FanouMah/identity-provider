@@ -17,24 +17,29 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
+    @SuppressWarnings("deprecation")
     @Bean
-public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-    http
-            .csrf(csrf -> csrf.disable())  // Désactive CSRF (utile avec JWT)
-            .authorizeRequests(requests -> requests
-                    .requestMatchers("/api/auth/register",
-                                     "/api/auth/verify",
-                                     "/api/login/send",
-                                     "/api/login/verify",
-                                     "/api/user/resettentative/send",
-                                     "/api/user/resettentative/verify",
-                                     "/api/user/update"
-                                    ).permitAll()  // Permet l'accès à l'inscription et à la vérification sans authentification
-                    .anyRequest().authenticated()  // Nécessite l'authentification pour toutes les autres requêtes
-            )
-            .httpBasic().disable()  // Désactive l'authentification HTTP de base
-            .formLogin().disable();  // Désactive l'authentification via formulaire
-    return http.build();
-}
-
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+                .csrf(csrf -> csrf.disable())
+                .authorizeRequests(requests -> requests
+                        .requestMatchers(
+                                "/v3/api-docs/**",
+                                "/swagger-ui/**",
+                                "/swagger-ui.html",
+                                "/error",
+                                "/api/auth/register",
+                                "/api/auth/verify",
+                                "/api/login/send",
+                                "/api/login/verify",
+                                "/api/user/resettentative/send",
+                                "/api/user/resettentative/verify",
+                                "/api/user/update"
+                        ).permitAll()
+                        .anyRequest().authenticated()
+                )
+                .httpBasic(basic -> basic.disable()) 
+                .formLogin(login -> login.disable());
+        return http.build();
+    }
 }

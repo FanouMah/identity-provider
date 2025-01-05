@@ -74,7 +74,7 @@ public class UserService {
     
     public  void verifyEmailResetPin(String token) {
         TokenResetPin tokenResetPin = tokenResetPinRepository.findByCode(token)
-                .orElseThrow(() -> new RuntimeException("Token invalide ou expiré"));
+                .orElseThrow(() -> new RuntimeException("Token invalide"));
         
         if (tokenResetPin.getDateExpiration().isBefore(LocalDateTime.now())) {
             throw new RuntimeException("Token expiré");
@@ -112,9 +112,9 @@ public class UserService {
         if (userUpdates.getdateNaissance() != null) {
             userUpdates.setdateNaissance(userUpdates.getdateNaissance());
         }
-        if (userUpdates.getPassword() != null) {
-            existingUser.setPassword(passwordEncoder.encode(userUpdates.getPassword()));
-        }
+        // if (userUpdates.getPassword() != null) {
+        //     existingUser.setPassword(passwordEncoder.encode(userUpdates.getPassword()));
+        // }
 
         usersRepository.save(existingUser);
         return existingUser;

@@ -8,9 +8,12 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import itu.prom16.identity_provider.entity.Users;
+import itu.prom16.identity_provider.repository.UsersRepository;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -27,7 +30,16 @@ public class JwtTokenUtil {
     @Value("${delai.token.session}")
     private long EXPIRATION_TIME;
 
-    public String generateToken(Users user) {
+    private final UsersRepository usersRepository;
+
+    public JwtTokenUtil(UsersRepository usersRepository) {
+        this.usersRepository = usersRepository;
+    }
+
+    @SuppressWarnings("deprecation")
+    public String generateToken(Users userInput) {
+        Users user = usersRepository.findByEmail(userInput.getEmail())
+                .orElseThrow(() -> new RuntimeException("Utilisateur non trouvé avec l'email : " + userInput.getEmail()));
         Map<String, Object> claims = new HashMap<>();
         claims.put("id", user.getidUsers());
         claims.put("email", user.getEmail());
@@ -47,6 +59,7 @@ public class JwtTokenUtil {
         return getAllClaimsFromToken(token).getSubject(); // Le sujet contient l'email
     }
 
+    @SuppressWarnings("deprecation")
     private Claims getAllClaimsFromToken(String token) {
         return Jwts.parser()
                 .setSigningKey(SECRET_KEY.getBytes())

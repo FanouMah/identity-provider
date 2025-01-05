@@ -1,7 +1,7 @@
 # Todo List - Projet Fournisseur d'Identité
 
 ## **1. Configuration de l'Environnement**
-- [x][Fanou] **Initialiser le projet Spring Boot**
+- [x][Fanomezantsoa] **Initialiser le projet Spring Boot**
     - Utilisation de Spring Initializr
     - Ajout des dépendances :
       - Spring Web
@@ -12,30 +12,35 @@
       - PostgreSQL Driver
       - Spring Boot Starter Validation
       - JWT (Java JWT library)
-- [ ][Fanou] **Configurer Docker Compose pour PostgreSQL et l'application**
-    - Créer un fichier `docker-compose.yaml` avec PostgreSQL et SMTP
-    - Configurer les ports exposés
+- [x][Fanomezantsoa] **Configurer Docker Compose pour PostgreSQL et l'application**
+    - [ ]Créer un fichier `docker-compose.yaml` avec PostgreSQL et SMTP
+    - [ ]Configurer les ports exposés
 - [x][Yohan] **Configurer l'application Spring Boot**
-    - Fichier `application.properties` pour :
+    - [x]Fichier `application.properties` pour :
       - Configuration de la base de données PostgreSQL
       - Configuration SMTP (envoi d'email)
       - Configuration JWT (clé secrète, expiration)
-- [ ] **Configurer MailHog pour les tests d'email locaux**
 
 ---
 
 ## **2. Base de Données**
 - [x][Itokiana] **Modélisation de la base de données**
     - Création des entités :
-        - `User` : Gère les utilisateurs (id, email, password, nom, prenom, emailVerified, failedLoginAttempts, sessionExpiry)
-        - `VerificationToken` : Gère les tokens pour la validation d'email (avec date d'expiration)
-        - `LoginAttempt` : Gère les tentatives de connexion
-        - `PinVerification` : Stocke les PIN temporaires pour la validation multifactorielle
-- [x][Fanou & Yohan] **Création des répositories JPA**
-    - `UserRepository`
-    - `VerificationTokenRepository`
-    - `LoginAttemptRepository`
-    - `PinVerificationRepository`
+        - `session_users` : Gère temporairement les utilisateurs pendant l'inscription
+        - `Users` : Gère les utilisateurs 
+        - `token_inscription` : Gère les tokens pour la validation d'email
+        - `historique_tentative` : Gère les tentatives de connexion
+        - `pin_verification` : Stocke les PIN pour la validation multifactorielle
+        - `token_reset_pin` : Gère les tokens pour la reinisialisation du nombre de tentative par email
+        - `historique_connexion` : Gère les tentatives de connexion
+- [x][Fanomezantsoa & Yohan] **Création des répositories JPA**
+    - [x]`SessionUserRepository`
+    - [x]`UsersRepository`
+    - [x]`TokenInscriptionRepository`
+    - [x]`HistoriqueTentativeRepository`
+    - [x]`PinVerificationRepository`
+    - [x]`TokenResetPinRepository`
+    - [x]`HistoriqueConnexionRepository`
 - [x][Itokiana] **Configurer les scripts d'initialisation de la base de données**
 
 ---
@@ -53,14 +58,14 @@
     - Marquer l'email comme vérifié
 
 ### **Authentification Multifacteur**
-- [x][Fanou] Endpoint **POST /api/login/send**
+- [x][Fanomezantsoa] Endpoint **POST /api/login/send**
     - Valider les identifiants utilisateur
     - Générer un PIN aléatoire (aléatoire à chaque tentative) et l'envoyer par email
     - Stocker le PIN temporairement avec une expiration
-- [x][Fanou] Endpoint **POST /api/login/verify**
+- [x][Fanomezantsoa] Endpoint **POST /api/login/verify**
     - Valider le PIN entré par l'utilisateur
     - Retourner un JWT si la validation réussit
-- [x][Fanou] Gestion des **tentatives de connexion**
+- [x][Fanomezantsoa] Gestion des **tentatives de connexion**
     - Compter les échecs
     - Bloquer le compte après 3 échecs
     - Envoyer un email avec un lien de validation contenant le token
@@ -69,8 +74,8 @@
 
 ### **Gestion de Compte Utilisateur**
 - [ ][Ony] Endpoint **GET /api/user/profile** : Récupérer les informations de l'utilisateur
-- [ ][Ony] Endpoint **PUT /api/user/update** : Modifier les informations utilisateur (nom, prénom)
-- [ ][Ony] Empêcher la modification de l'email
+- [x][Ony] Endpoint **PUT /api/user/update** : Modifier les informations utilisateur (nom, prénom)
+- [x][Ony] Empêcher la modification de l'email
 
 ### **Gestion des Sessions**
 - [ ][Ony] Utiliser **JWT** pour gérer les sessions
@@ -79,8 +84,7 @@
 - [ ][Ony] Endpoint **POST /api/auth/logout** : Invalider le token JWT
 
 ### **Sécurisation des Mots de Passe**
-- [ ][Ony] Hashing des mots de passe avec **BCrypt**
-- [ ][Ony] Implémenter une politique de mot de passe fort
+- [x][Yohan] Hashing des mots de passe avec **BCrypt**
 
 ---
 
@@ -88,17 +92,17 @@
 - [X][Itokiana] Création des templates HTML pour :
     - Validation d'email : `verification_email.html`
     - Envoi de PIN : `pin_verification_email.html`
-- [x][Fanou] Intégration des templates
+- [x][Fanomezantsoa] Intégration des templates
 - [x][Yohan] Envoi des emails via SMTP
-- [x][Fanou] Génération d'un **PIN aléatoire** à chaque nouvelle tentative d'authentification
+- [x][Fanomezantsoa] Génération d'un **PIN aléatoire** à chaque nouvelle tentative d'authentification
 - [x][Yohan] Gérer les **tokens expirés** pour la validation d'email
 
 ---
 
 ## **5. Documentation API avec Swagger**
-- [ ][Ony] Ajouter la dépendance Swagger
-- [ ][Ony] Configurer Swagger UI accessible à `/swagger-ui/`
-- [ ][Ony] Documenter tous les endpoints :
+- [x][Ony] Ajouter la dépendance Swagger
+- [x][Ony] Configurer Swagger UI accessible à `/swagger-ui.html`
+- [x][Ony] Documenter tous les endpoints :
     - Inscription
     - Authentification
     - Validation de PIN
@@ -107,10 +111,10 @@
 ---
 
 ## **6. Tests et Validation**
-- [x][Fanou & Yohan] **Tests d'Intégration**
+- [x][Fanomezantsoa & Yohan] **Tests d'Intégration**
     - Tester les endpoints via Postman
-- [x][Fanou & Yohan] **Vérification de l'envoi d'emails**
-- [x][Fanou & Yohan] **Tests des scénarios d'erreurs**
+- [x][Fanomezantsoa & Yohan] **Vérification de l'envoi d'emails**
+- [x][Fanomezantsoa & Yohan] **Tests des scénarios d'erreurs**
     - Tentatives de connexion échouées
     - Validation d'email expirée
     - PIN incorrect
@@ -118,35 +122,15 @@
 ---
 
 ## **7. Collection Postman**
-- [ ][Itokiana] Créer une collection Postman pour tester :
-    - Inscription
-    - Validation d'email
-    - Authentification
-    - Validation de PIN
-    - Gestion du compte utilisateur
+- [x][Itokiana] Créer une collection Postman pour tester :
+    - [x]Inscription
+    - [x]Validation d'email
+    - [x]Authentification
+    - [x]Validation de PIN
+    - [x]Gestion du compte utilisateur
 - [ ][Itokiana] Inclure des scénarios d'erreur dans la collection
 
 ---
 
-## **8. Tests des Scénarios d'Utilisation**
-
-### Scénario 1 : Inscription
-1. Utilisateur s'inscrit avec email et mot de passe.
-2. Reçoit un email de confirmation avec un lien.
-3. Clique sur le lien pour vérifier l'email.
-4. Si le token a expiré, on retourne un erreur.
-
-### Scénario 2 : Authentification Multifacteur
-1. Utilisateur se connecte avec email et mot de passe.
-2. Reçoit un PIN par email (aléatoire à chaque connexion).
-3. Valide le PIN pour se connecter.
-
-### Scénario 3 : Gestion des échecs de connexion
-1. Tentatives multiples de connexion avec mot de passe incorrect.
-2. Blocage du compte après 3 tentatives.
-3. Réinitialisation des tentatives via email.
-
----
-
-## **9. Déploiement**
-- [ ][Fanou] Créer une image Docker de l'application
+## **8. Déploiement**
+- [x][Fanomezantsoa] Créer une image Docker de l'application

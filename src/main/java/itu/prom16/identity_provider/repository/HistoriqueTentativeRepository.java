@@ -6,11 +6,13 @@ package itu.prom16.identity_provider.repository;
 
 import itu.prom16.identity_provider.entity.HistoriqueTentative;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Fanou
  */
+@Repository
 public interface HistoriqueTentativeRepository extends JpaRepository<HistoriqueTentative, Integer> {
     
 }
