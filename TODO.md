@@ -12,7 +12,7 @@
       - PostgreSQL Driver
       - Spring Boot Starter Validation
       - JWT (Java JWT library)
-- [ ][Fanomezantsoa] **Configurer Docker Compose pour PostgreSQL et l'application**
+- [x][Fanomezantsoa] **Configurer Docker Compose pour PostgreSQL et l'application**
     - [ ]Créer un fichier `docker-compose.yaml` avec PostgreSQL et SMTP
     - [ ]Configurer les ports exposés
 - [x][Yohan] **Configurer l'application Spring Boot**
@@ -133,4 +133,4 @@
 ---
 
 ## **8. Déploiement**
-- [ ][Fanomezantsoa] Créer une image Docker de l'application
+- [x][Fanomezantsoa] Créer une image Docker de l'application
