@@ -1,0 +1,258 @@
+{
+	"info": {
+		"_postman_id": "6bd4129a-0b80-4398-989b-abe28b4ceadd",
+		"name": "identity-provider",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39836153",
+		"_collection_link": "https://www.postman.com/fanou-team/exam-cloud/collection/hua9jo8/identity-provider?action=share&source=collection_link&creator=39836153"
+	},
+	"item": [
+		{
+			"name": "inscription",
+			"item": [
+				{
+					"name": "inscription",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nom\": \"string\",\r\n  \"prenom\": \"string\",\r\n  \"email\": \"string\",\r\n  \"password\": \"string\",\r\n  \"dateNaissance\": \"2025-01-01\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						},
+						"description": "Ajouter des valeurs pour le Body"
+					},
+					"response": []
+				},
+				{
+					"name": "verification insciption",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/auth/verify?token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"verify"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": ""
+								}
+							]
+						},
+						"description": "recuperer le token recu et metre en param"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "connexion",
+			"item": [
+				{
+					"name": "connexion",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"string\",\r\n  \"password\": \"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/login/send",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"login",
+								"send"
+							]
+						},
+						"description": "Ajouter des valeurs pour le Body"
+					},
+					"response": []
+				},
+				{
+					"name": "Verification PIN",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"string\",\r\n  \"password\": \"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/login/verify?pin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"login",
+								"verify"
+							],
+							"query": [
+								{
+									"key": "pin",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "reset nb tentative",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"string\",\r\n  \"password\": \"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/user/resettentative/send",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"user",
+								"resettentative",
+								"send"
+							]
+						},
+						"description": "Ajouter des valeurs pour le Body"
+					},
+					"response": []
+				},
+				{
+					"name": "verification reset nb tentative",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/user/resettentative/verify?token=",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"user",
+								"resettentative",
+								"verify"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": ""
+								}
+							]
+						},
+						"description": "validation du reinitialisation du nombre de tentative de connexion"
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "noauth"
+			}
+		},
+		{
+			"name": "Gestion du compte",
+			"item": [
+				{
+					"name": "update profil",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nom\": \"string\",\r\n  \"prenom\": \"string\",\r\n  \"dateNaissance\" :null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"description": "mis a jour des information d'utilisateur"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
