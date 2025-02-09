@@ -88,7 +88,7 @@ public class UserService {
     private Users verifyUser(Users userInput) {
         // Vérification si l'utilisateur existe dans la base de données
         Users user = usersRepository.findByEmail(userInput.getEmail())
-                .orElseThrow(() -> new RuntimeException("Utilisateur non trouvé avec l'email : " + userInput.getEmail()));
+                .orElseThrow(() -> new RuntimeException("Utilisateur non trouvé avec l'email " + userInput.getEmail()));
 
         // Vérification du mot de passe
         if (!passwordEncoder.matches(userInput.getPassword(), user.getPassword())) {
@@ -99,7 +99,7 @@ public class UserService {
 
     public Users updateUserDetails(String email, Users userUpdates) {
         Users existingUser = usersRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("Utilisateur non trouvé avec l'email : " + email));
+                .orElseThrow(() -> new RuntimeException("Utilisateur non trouvé avec l'email " + email));
 
         // Mise à jour des informations utilisateur sauf l'email
         if (userUpdates.getNom() != null) {

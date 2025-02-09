@@ -64,7 +64,7 @@ public class LoginController {
                 // Ajout du token dans les headers de la réponse
                 return ResponseEntity.ok()
                         .header("authorization", token) // Ajouter le token dans le header
-                        .body("Connexion réussie, token généré : "+token); // Message de confirmation dans le corps
+                        .body(token); // Message de confirmation dans le corps
             } else {
                 return ResponseEntity.badRequest().body("Échec de la vérification du PIN.");
             }

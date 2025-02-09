@@ -8,7 +8,7 @@
 # COPY --from=build /identity-provider/target/*.war /usr/local/tomcat/webapps/identity-provider.war
 # CMD ["catalina.sh", "run"]
 
-FROM openjdk:17-oracle
+FROM openjdk:17-jdk
 COPY target/*.jar identity-provider.jar
 EXPOSE 8080
 ENTRYPOINT [ "java","-jar","identity-provider.jar" ]

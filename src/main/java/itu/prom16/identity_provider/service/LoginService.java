@@ -53,7 +53,7 @@ public class LoginService {
     public Users verifyUser(Users userInput) {
         // Vérification si l'utilisateur existe dans la base de données
         Users user = usersRepository.findByEmail(userInput.getEmail())
-                .orElseThrow(() -> new RuntimeException("Utilisateur non trouvé avec l'email : " + userInput.getEmail()));
+                .orElseThrow(() -> new RuntimeException("Utilisateur non trouvé avec l'email " + userInput.getEmail()));
 
         if (user.getnombreTentative() < 1) {
             throw new RuntimeException("Vous avez atteint le nombre de tentative de connexion.");
